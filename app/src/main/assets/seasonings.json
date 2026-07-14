@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "name": "Beef",
+      "seasonings": ["Garlic", "Black Pepper", "Rosemary", "Thyme", "Bay Leaf", "Cumin", "Mustard", "Paprika", "Onion Powder"],
+      "description": "Hearty seasonings for rich, savory red meats."
+    },
+    {
+      "name": "Pork",
+      "seasonings": ["Sage", "Rosemary", "Thyme", "Garlic", "Caraway Seeds", "Apple Cider Vinegar", "Mustard", "Ginger", "Brown Sugar"],
+      "description": "A balance of herbs, acid, and a touch of sweetness."
+    },
+    {
+      "name": "Poultry",
+      "seasonings": ["Basil", "Tarragon", "Lemon Zest", "Rosemary", "Thyme", "Sage", "Paprika", "Garlic"],
+      "description": "Bright and aromatic herbs that complement chicken and turkey."
+    },
+    {
+      "name": "Fish & Seafood",
+      "seasonings": ["Dill", "Parsley", "Lemon Zest", "Chives", "Tarragon", "Fennel", "Garlic", "Cajun Blend"],
+      "description": "Light, zesty, and herbaceous seasonings for delicate proteins."
+    },
+    {
+      "name": "Leafy Greens",
+      "seasonings": ["Garlic", "Onion", "Red Pepper Flakes", "Balsamic Vinegar", "Apple Cider Vinegar", "Lemon Juice"],
+      "description": "Acid and spice to cut through the bitterness of greens."
+    },
+    {
+      "name": "Root Vegetables",
+      "seasonings": ["Rosemary", "Thyme", "Garlic", "Dill", "Ginger", "Cumin", "Nutmeg"],
+      "description": "Earthy and warm spices for potatoes, carrots, and beets."
+    }
+  ]
+}
