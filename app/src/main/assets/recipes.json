@@ -1,92 +1,108 @@
 {
   "recipes": [
     {
-      "title": "Apple Pie",
-      "ingredients": [
-        "3/4 cup white sugar",
-        "2 tablespoons all-purpose flour",
-        "1/2 teaspoon ground cinnamon",
-        "1/4 teaspoon ground nutmeg",
-        "1/2 teaspoon lemon zest",
-        "7 cups thinly sliced apples",
-        "2 teaspoons lemon juice",
-        "1 tablespoon butter",
-        "1 recipe pastry for a 9 inch double crust pie",
-        "4 tablespoons milk (optional)"
-      ],
+      "title": "Old Fashioned Apple Pie",
+      "ingredients": ["3/4 cup Sugar", "2 tbsp Flour", "1/2 tsp Cinnamon", "1/4 tsp Nutmeg", "1/2 tsp Lemon Zest", "7 cups thinly sliced Apples", "2 tsp Lemon Juice", "1 tbsp Butter", "1 recipe Pastry for 9-inch double crust", "4 tbsp Milk"],
       "directions": [
         "Preheat oven to 425 degrees F (220 degrees C).",
         "Mix together the sugar, flour, cinnamon, nutmeg and lemon peel.",
         "Line one crust in a 9-inch deep-dish pie pan. Layer 1/3 of apples into pie crust. Sprinkle with sugar mixture and repeat until done. Sprinkle with lemon juice and dot with butter.",
-        "Place second pie crust on top of filling and flute the edges. Cut vents in top crust and brush with milk for a glazed appearance if desired.",
+        "Place second pie crust on top of filling and flute the edges. Cut vents in top crust and brush with milk.",
         "Bake at 425 degrees F (220 degrees C) for 40 to 50 minutes."
       ],
-      "language": "en-US",
-      "source": "allrecipes.com",
-      "tags": [],
-      "url": "http://allrecipes.com/recipe/16268/apple-pie/"
+      "image": "https://www.allrecipes.com/thmb/XpM_N9-F1xS_6Yv8Z1S8X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/12682-apple-pie-by-grandmother-opale-beauty-4x3-3889-4932174620f340868f7756f7e8a93557.jpg"
     },
     {
-      "title": "Banana Bread",
-      "ingredients": [
-        "1 stick butter, melted, plus softened butter for greasing",
-        "2 cups flour",
-        "1/2 teaspoon salt",
-        "1 1/2 teaspoons baking powder",
-        "1 cup sugar",
-        "3 very ripe bananas, mashed with a fork until smooth",
-        "2 eggs",
-        "1 teaspoon vanilla extract",
-        "1/2 cup chopped walnuts (optional)",
-        "1/2 cup shredded unsweetened coconut (optional)"
-      ],
+      "title": "The Best Banana Bread",
+      "ingredients": ["1 stick Butter", "2 cups Flour", "1/2 tsp Salt", "1 1/2 tsp Baking Powder", "1 cup Sugar", "3 very ripe Bananas", "2 Eggs", "1 tsp Vanilla Extract"],
       "directions": [
-        "Heat the oven to 350°F. Grease a 9x5-inch loaf pan with softened butter.",
-        "Whisk together the flour, salt, baking powder, and sugar in a large bowl.",
-        "Mix together the melted butter and mashed bananas in a separate bowl. Beat in the eggs and vanilla until well combined. Stir this mixture into the dry ingredients just enough to combine everything. Gently fold in the nuts and coconut if you’re using them.",
-        "Pour the batter into the prepared pan. Bake for 50 to 60 minutes or until the bread is golden brown and a toothpick inserted in the center of the bread comes out almost entirely clean. Cool the pan on a rack for 15 minutes, then carefully turn it upside down to release the loaf. Serve warm or at room temperature or wrap in plastic and keep at room temperature for a couple days.",
-        "Honey Whole Grain Banana Bread: For a delicately sweet, nuttier bread, substitute 1 1/4 cups whole wheat flour and 3/4 cup oat bran for the all-purpose flour. Reduce the sugar to 3/4 cup and whisk in 1 teaspoon cinnamon. Add 1/4 cup honey to the melted butter.",
-        "Chocolate Banana Bread: Reduce the flour to 1 1/2 cups. Add 1/2 cup Dutch-process cocoa powder to the flour. Fold up to 1 cup chopped dark chocolate into the batter.",
-        "Tropical Banana Bread: Brown sugar and a few choice add-ins transform basic banana bread into a tropical treat. Replace half the sugar with 1/2 cup packed dark brown sugar. Fold 1/3 cup chopped dried pineapple, 1/3 cup shredded unsweetened coconut, and 1/3 cup chopped macadamia nuts into the batter.",
-        "Orange Banana Bread: Whisk 2 tablespoons grated orange zest into the dry ingredients. Mix 1/4 cup fresh orange juice into the melted butter and bananas.",
-        "Pumpkin Bread: Substitute 1 cup pumpkin purée for the bananas. Whisk 1 teaspoon cinnamon, 1/4 teaspoon nutmeg, 1/4 teaspoon ginger, and 1/8 teaspoon ground cloves into the dry ingredients.",
-        "Peanut Butter Banana Bread: Add 1/3 cup peanut butter to the bananas. Cut the butter down to 5 tablespoons.",
-        "Apricot Cream Cheese Bread: The soft tang of cream cheese is a wonderful flavor and texture enhancer for quick breads. Replace the bananas with 1/2 cup apricot purée (soak 1/2 cup dried apricots in boiling water for 10 minutes and drain, reserving 2 tablespoons soaking water, and then purée). Reduce the butter to 3 tablespoons. In a separate bowl, beat 1/4 cup (2 ounces) cream cheese with the eggs, vanilla, and sugar until well combined. Stir the apricot purée and butter mixture into the cream cheese mixture, then add the dry ingredients."
+        "Heat the oven to 350°F. Grease a 9x5-inch loaf pan.",
+        "Whisk together the flour, salt, baking powder, and sugar.",
+        "Mix together the melted butter and mashed bananas. Beat in the eggs and vanilla. Stir into the dry ingredients.",
+        "Pour the batter into the prepared pan. Bake for 50 to 60 minutes."
       ],
-      "language": "en-US",
-      "source": "www.epicurious.com",
-      "tags": [
-        "Bake",
-        "Banana",
-        "Bread",
-        "Breakfast",
-        "snack",
-        "Walnut",
-        "Coconut"
-      ],
-      "url": "http://www.epicurious.com/recipes/food/views/banana-bread"
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20144-banana-banana-bread-mfs-60-4x3-3ad05c6d31124694856f6690460c888e.jpg"
     },
     {
-      "title": "Meatloaf",
-      "ingredients": [
-        "2 pounds lean ground beef",
-        "1 (10.75 ounce) can condensed tomato soup",
-        "1 onion, finely diced",
-        "1 cup rolled oats",
-        "2 eggs, beaten",
-        "1 tablespoon steak sauce",
-        "1/2 cup ketchup",
-        "3 tablespoons prepared mustard"
-      ],
+      "title": "Classic Savory Meatloaf",
+      "ingredients": ["2 lbs lean ground Beef", "1 (10.75 oz) can Condensed Tomato Soup", "1 Onion, finely diced", "1 cup Rolled Oats", "2 Eggs, beaten", "1/2 cup Ketchup", "3 tbsp Mustard"],
       "directions": [
-        "In a large bowl, combine ground meat, soup, chopped onion, rolled oats, eggs, steak sauce, ketchup and mustard. Mix well.",
-        "Shape into a loaf, and pat Into a loaf pan.",
-        "Bake in a preheated 350 degrees F (175 degrees C) oven for 1 hour or until done."
+        "In a large bowl, combine meat, soup, onion, oats, and eggs. Mix well.",
+        "Shape into a loaf, and pat into a loaf pan.",
+        "Bake in a preheated 350 degrees F (175 degrees C) oven for 1 hour."
       ],
-      "language": "en-US",
-      "source": "allrecipes.com",
-      "tags": [],
-      "url": "http://allrecipes.com/recipe/14603/meatloaf/"
+      "image": "https://www.allrecipes.com/thmb/X-xS_6Yv8Z1S8X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/14603-meatloaf-4x3-1-2000-84386762e8a14e1a8a307c6f0c8e00e8.jpg"
+    },
+    {
+      "title": "Lemon Garlic Grilled Salmon",
+      "ingredients": ["4 Salmon Fillets", "2 tbsp Lemon Juice", "2 tbsp Butter, melted", "2 cloves Garlic, minced", "1 tsp dried Dill Weed"],
+      "directions": [
+        "Season salmon fillets with salt and pepper.",
+        "Whisk together lemon juice, butter, garlic, and dill.",
+        "Grill salmon for 5 to 7 minutes per side, brushing with butter mixture."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/12720-grilled-salmon-II-mfs-4x3-0373-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "Creamy Chicken Alfredo",
+      "ingredients": ["1 lb Fettuccine", "1 lb Chicken Breast", "1/2 cup Butter", "1 pint Heavy Cream", "1/2 cup Parmesan Cheese", "2 cloves Garlic, minced"],
+      "directions": [
+        "Cook pasta according to package directions.",
+        "Sauté chicken in butter until cooked through.",
+        "Simmer cream and garlic in a pan. Stir in cheese until melted. Toss with pasta and chicken."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/23431-quick-and-easy-chicken-alfredo-mfs-4x3-0219-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "Hearty Beef Stew",
+      "ingredients": ["2 lbs Beef Chuck, cubed", "4 large Potatoes, cubed", "4 Carrots, sliced", "1 Onion, chopped", "4 cups Beef Broth", "1 tsp dried Thyme"],
+      "directions": [
+        "Brown beef in a large pot.",
+        "Add onion, potatoes, carrots, broth, and thyme.",
+        "Simmer on low for 1.5 to 2 hours until meat is tender."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/25678-beef-stew-VI-mfs-4x3-0164-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "Crispy Caesar Salad",
+      "ingredients": ["1 head Romaine Lettuce", "1 cup Croutons", "1/4 cup Parmesan Cheese", "1/2 cup Caesar Dressing", "1 tsp Black Pepper"],
+      "directions": [
+        "Wash and tear lettuce into bite-sized pieces.",
+        "Toss lettuce with dressing until well coated.",
+        "Top with croutons, cheese, and freshly cracked black pepper."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/14469-caesar-salad-mfs-4x3-0231-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "The Ultimate Chocolate Chip Cookie",
+      "ingredients": ["1 cup Butter", "1 cup White Sugar", "1 cup Brown Sugar", "2 Eggs", "2 tsp Vanilla Extract", "3 cups Flour", "1 tsp Baking Soda", "2 cups Chocolate Chips"],
+      "directions": [
+        "Preheat oven to 350 degrees F (175 degrees C).",
+        "Cream together butter and sugars. Beat in eggs and vanilla.",
+        "Mix in dry ingredients and stir in chocolate chips.",
+        "Bake for 10 minutes or until edges are golden."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/10813-best-chocolate-chip-cookies-mfs-4x3-0331-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "Fluffy Buttermilk Pancakes",
+      "ingredients": ["1 1/2 cups Flour", "1 tbsp Sugar", "1 tsp Salt", "1 tsp Baking Powder", "1/2 tsp Baking Soda", "1 1/4 cups Buttermilk", "1 Egg", "3 tbsp Butter, melted"],
+      "directions": [
+        "Whisk together dry ingredients.",
+        "Whisk together buttermilk, egg, and butter. Combine with dry ingredients.",
+        "Cook on a lightly oiled griddle until bubbles form and pop."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-good-old-fashioned-pancakes-mfs-4x3-0131-31124694856f6690460c888e.jpg"
+    },
+    {
+      "title": "Easy Homemade Guacamole",
+      "ingredients": ["3 Avocados, mashed", "1 Lime, juiced", "1 tsp Salt", "1/2 cup Onion, diced", "3 tbsp Cilantro, chopped", "2 Roma Tomatoes, diced"],
+      "directions": [
+        "In a medium bowl, mash together the avocados, lime juice, and salt.",
+        "Mix in onion, cilantro, and tomatoes.",
+        "Refrigerate for 1 hour for best flavor, or serve immediately."
+      ],
+      "image": "https://www.allrecipes.com/thmb/v_9mS_X-y8G-E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/14064-easy-guacamole-mfs-4x3-0182-31124694856f6690460c888e.jpg"
     }
   ]
 }

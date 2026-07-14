@@ -2,33 +2,142 @@
   "categories": [
     {
       "name": "Beef",
-      "seasonings": ["Garlic", "Black Pepper", "Rosemary", "Thyme", "Bay Leaf", "Cumin", "Mustard", "Paprika", "Onion Powder"],
-      "description": "Hearty seasonings for rich, savory red meats."
+      "description": "Bold and savory profiles that stand up to rich fats.",
+      "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop",
+      "seasonings": [
+        {
+          "name": "Garlic",
+          "note": "Roasted or powdered for deep umami.",
+          "imageUrl": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?w=200&auto=format&fit=crop",
+          "isStocked": true,
+          "category": "Spices"
+        },
+        {
+          "name": "Black Pepper",
+          "note": "Freshly cracked for a sharp bite.",
+          "imageUrl": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=200&auto=format&fit=crop",
+          "isStocked": true,
+          "category": "Spices"
+        },
+        {
+          "name": "Rosemary",
+          "note": "Piney aroma that complements seared crusts.",
+          "imageUrl": "https://images.unsplash.com/photo-1515543582370-4cff31e54e8b?w=200&auto=format&fit=crop",
+          "isStocked": true,
+          "category": "Herbs"
+        }
+      ],
+      "condiments": [
+        {
+          "name": "Horseradish",
+          "note": "Adds a pungent, clearing heat.",
+          "imageUrl": "https://images.unsplash.com/photo-1590401567362-e6191c4d922a?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        },
+        {
+          "name": "Chimichurri",
+          "note": "Bright parsley and garlic vinegar sauce.",
+          "imageUrl": "https://images.unsplash.com/photo-1621510456681-233013d24be4?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        },
+        {
+          "name": "Worcestershire",
+          "note": "A classic savory flavor enhancer.",
+          "imageUrl": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        }
+      ]
     },
     {
       "name": "Pork",
-      "seasonings": ["Sage", "Rosemary", "Thyme", "Garlic", "Caraway Seeds", "Apple Cider Vinegar", "Mustard", "Ginger", "Brown Sugar"],
-      "description": "A balance of herbs, acid, and a touch of sweetness."
+      "description": "Sweet and acidic balances for tender white meat.",
+      "imageUrl": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=800&auto=format&fit=crop",
+      "seasonings": [
+        {
+          "name": "Sage",
+          "note": "Earthy and slightly peppery.",
+          "imageUrl": "https://images.unsplash.com/photo-1605330341183-035d5395123c?w=200&auto=format&fit=crop",
+          "category": "Herbs"
+        },
+        {
+          "name": "Ginger",
+          "note": "Warmth that pairs well with pork's sweetness.",
+          "imageUrl": "https://images.unsplash.com/photo-1615485500704-8e990f3900f1?w=200&auto=format&fit=crop",
+          "category": "Spices"
+        },
+        {
+          "name": "Brown Sugar",
+          "note": "For caramelization and sweetness.",
+          "imageUrl": "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=200&auto=format&fit=crop",
+          "isStocked": true,
+          "category": "Pantry Basics"
+        }
+      ],
+      "condiments": [
+        {
+          "name": "BBQ Sauce",
+          "note": "Smoky and sweet glaze.",
+          "imageUrl": "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        },
+        {
+          "name": "Honey Mustard",
+          "note": "Tangy and sweet dipping sauce.",
+          "imageUrl": "https://images.unsplash.com/photo-1534604973900-c41ab4c5d4b0?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        },
+        {
+          "name": "Applesauce",
+          "note": "Classic fruity accompaniment.",
+          "imageUrl": "https://images.unsplash.com/photo-1584732170349-2d93e7b16388?w=200&auto=format&fit=crop",
+          "category": "Pantry Basics"
+        }
+      ]
     },
     {
       "name": "Poultry",
-      "seasonings": ["Basil", "Tarragon", "Lemon Zest", "Rosemary", "Thyme", "Sage", "Paprika", "Garlic"],
-      "description": "Bright and aromatic herbs that complement chicken and turkey."
+      "description": "Neutral base that carries aromatic herbs and creamy sauces.",
+      "imageUrl": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&auto=format&fit=crop",
+      "seasonings": [
+        { "name": "Thyme", "note": "Floral and versatile.", "imageUrl": "https://images.unsplash.com/photo-1594911775836-391307010f35?w=200&auto=format&fit=crop", "category": "Herbs", "isStocked": true },
+        { "name": "Paprika", "note": "Smoky color and mild sweetness.", "imageUrl": "https://images.unsplash.com/photo-1599940824399-b87987cb5733?w=200&auto=format&fit=crop", "category": "Spices" },
+        { "name": "Tarragon", "note": "Slight anise flavor for elegance.", "imageUrl": "https://images.unsplash.com/photo-1590401567362-e6191c4d922a?w=200&auto=format&fit=crop", "category": "Herbs" }
+      ],
+      "condiments": [
+        { "name": "Gravy", "note": "Rich savory reduction.", "imageUrl": "https://images.unsplash.com/photo-1583321500900-82807e458f3c?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Garlic Aioli", "note": "Creamy and pungent dip.", "imageUrl": "https://images.unsplash.com/photo-1582234372722-50d7ccc30ebd?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Buffalo Sauce", "note": "Tangy vinegar-based heat.", "imageUrl": "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?w=200&auto=format&fit=crop", "category": "Pantry Basics" }
+      ]
     },
     {
       "name": "Fish & Seafood",
-      "seasonings": ["Dill", "Parsley", "Lemon Zest", "Chives", "Tarragon", "Fennel", "Garlic", "Cajun Blend"],
-      "description": "Light, zesty, and herbaceous seasonings for delicate proteins."
+      "description": "Zesty and light profiles to enhance delicate flavors.",
+      "imageUrl": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&auto=format&fit=crop",
+      "seasonings": [
+        { "name": "Dill", "note": "Feathery and citrusy.", "imageUrl": "https://images.unsplash.com/photo-1588693951525-667746199a09?w=200&auto=format&fit=crop", "category": "Herbs" },
+        { "name": "Lemon Zest", "note": "Essential bright acidity.", "imageUrl": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200&auto=format&fit=crop", "category": "Pantry Basics", "isStocked": true },
+        { "name": "Old Bay", "note": "The quintessential seafood blend.", "imageUrl": "https://images.unsplash.com/photo-1599940824399-b87987cb5733?w=200&auto=format&fit=crop", "category": "Spices" }
+      ],
+      "condiments": [
+        { "name": "Tartar Sauce", "note": "Creamy with a pickle crunch.", "imageUrl": "https://images.unsplash.com/photo-1582234372722-50d7ccc30ebd?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Malt Vinegar", "note": "Classic for fried textures.", "imageUrl": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Cocktail Sauce", "note": "Zesty tomato and horseradish.", "imageUrl": "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?w=200&auto=format&fit=crop", "category": "Pantry Basics" }
+      ]
     },
     {
-      "name": "Leafy Greens",
-      "seasonings": ["Garlic", "Onion", "Red Pepper Flakes", "Balsamic Vinegar", "Apple Cider Vinegar", "Lemon Juice"],
-      "description": "Acid and spice to cut through the bitterness of greens."
-    },
-    {
-      "name": "Root Vegetables",
-      "seasonings": ["Rosemary", "Thyme", "Garlic", "Dill", "Ginger", "Cumin", "Nutmeg"],
-      "description": "Earthy and warm spices for potatoes, carrots, and beets."
+      "name": "Vegetables",
+      "description": "Nutty, earthy, and bright accents for produce.",
+      "imageUrl": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&auto=format&fit=crop",
+      "seasonings": [
+        { "name": "Cumin", "note": "Adds an earthy depth to roots.", "imageUrl": "https://images.unsplash.com/photo-1615485500704-8e990f3900f1?w=200&auto=format&fit=crop", "category": "Spices" },
+        { "name": "Red Pepper Flakes", "note": "A touch of heat for greens.", "imageUrl": "https://images.unsplash.com/photo-1599940824399-b87987cb5733?w=200&auto=format&fit=crop", "category": "Spices" },
+        { "name": "Nutmeg", "note": "Traditional for squash and spinach.", "imageUrl": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=200&auto=format&fit=crop", "category": "Spices" }
+      ],
+      "condiments": [
+        { "name": "Balsamic Glaze", "note": "Sweet and tart reduction.", "imageUrl": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Tahini", "note": "Creamy, nutty sesame paste.", "imageUrl": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200&auto=format&fit=crop", "category": "Pantry Basics" },
+        { "name": "Hummus", "note": "Savory chickpea spread.", "imageUrl": "https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?w=200&auto=format&fit=crop", "category": "Pantry Basics" }
+      ]
     }
   ]
 }

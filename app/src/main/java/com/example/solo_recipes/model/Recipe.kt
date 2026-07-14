@@ -10,7 +10,8 @@ data class Recipe(
     val language: String? = null,
     val source: String? = null,
     val tags: List<String> = emptyList(),
-    val url: String? = null
+    val url: String? = null,
+    val image: String? = null
 )
 
 @Serializable

@@ -1,0 +1,6 @@
+{
+  "name": "Solo-Recipes",
+  "description": "A premium culinary guide for home chefs to discover rich seasoning pairings, manage a custom kitchen pantry, and save delicious standalone recipes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
