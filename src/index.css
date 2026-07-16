@@ -46,6 +46,10 @@
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
+
+  --spacing-global-padding: 1.5rem;
+  --spacing-gutter: 1.25rem;
+  --spacing-stack-gap: 1.25rem;
 }
 
 @layer base {

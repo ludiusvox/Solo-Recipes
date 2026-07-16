@@ -12,7 +12,7 @@ export const CATEGORIES: CategoryDetail[] = [
     badge: 'RICH & SAVORY',
     tagline: 'Bold spices, marinades, and crusts.',
     description: 'Recommended spices and rubs for enhancing beef dishes, from steaks to slow-cooked roasts.',
-    image: '/src/assets/images/beef_seasoning_1784062685307.jpg',
+    image: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80',
     seasonings: [
       {
         id: 'smoked_paprika',
@@ -62,7 +62,7 @@ export const CATEGORIES: CategoryDetail[] = [
     badge: 'LIGHT & BRIGHT',
     tagline: 'Citrus, herbs, and delicate blends.',
     description: 'Delicate seasonings that respect and elevate the natural ocean flavors of premium catch.',
-    image: '/src/assets/images/fish_seafood_1784062694000.jpg',
+    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80',
     seasonings: [
       {
         id: 'dill',
@@ -112,7 +112,7 @@ export const CATEGORIES: CategoryDetail[] = [
     badge: 'FRESH & TANGY',
     tagline: 'Dressings, toasted seeds, and acids.',
     description: 'Bright dressings, crunch profiles, and mineral seasonings to lift dark and crisp leafy greens.',
-    image: '/src/assets/images/leafy_greens_1784062701760.jpg',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
     seasonings: [
       {
         id: 'balsamic_vinegar',
@@ -162,7 +162,7 @@ export const CATEGORIES: CategoryDetail[] = [
     badge: 'WARM & EARTHY',
     tagline: 'Warm spices, glazes, and robust herbs.',
     description: 'Flavors that caramelize during roasting, enriching the native sweetness of autumn harvests.',
-    image: '/src/assets/images/root_vegetables_1784062711149.jpg',
+    image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=800&q=80',
     seasonings: [
       {
         id: 'thyme',
@@ -212,7 +212,7 @@ export const CATEGORIES: CategoryDetail[] = [
     badge: 'CLASSIC & HERBAL',
     tagline: 'Classic rubs, brines, and delicate spices.',
     description: 'Perfect herbs and base elements to render chicken and turkey succulent and deeply fragrant.',
-    image: '/src/assets/images/poultry_seasoning_1784062724291.jpg',
+    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80',
     seasonings: [
       {
         id: 'sage',
@@ -268,7 +268,7 @@ export const RECIPES: RecipeItem[] = [
     cookTime: '10 mins',
     servings: 2,
     difficulty: 'Medium',
-    image: '/src/assets/images/beef_seasoning_1784062685307.jpg',
+    image: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80',
     description: 'A thick, dry-brined ribeye seared hot in a cast-iron skillet, basted generously with melted butter, crushed garlic, and fresh rosemary.',
     ingredients: [
       { name: 'Ribeye Steak (1.5" thick)', amount: '1 lb' },
@@ -304,7 +304,7 @@ export const RECIPES: RecipeItem[] = [
     cookTime: '12 mins',
     servings: 2,
     difficulty: 'Easy',
-    image: '/src/assets/images/fish_seafood_1784062694000.jpg',
+    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80',
     description: 'Crispy-skinned pan-roasted salmon fillet with a beautiful crust of sea salt, finished with fresh fragrant dill leaves and bright lemon zest oil.',
     ingredients: [
       { name: 'Salmon Fillets (skin on)', amount: '2 pieces' },
@@ -339,7 +339,7 @@ export const RECIPES: RecipeItem[] = [
     cookTime: '0 mins',
     servings: 2,
     difficulty: 'Easy',
-    image: '/src/assets/images/leafy_greens_1784062701760.jpg',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
     description: 'A peppery, crisp bowl of fresh arugula leaves tossed with premium toasted sesame seeds, whipped Dijon-balsamic dressing, and sea salt flakes.',
     ingredients: [
       { name: 'Fresh Baby Arugula', amount: '5 oz' },
@@ -374,7 +374,7 @@ export const RECIPES: RecipeItem[] = [
     cookTime: '30 mins',
     servings: 4,
     difficulty: 'Easy',
-    image: '/src/assets/images/root_vegetables_1784062711149.jpg',
+    image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=800&q=80',
     description: 'Cubed sweet potatoes, carrots, and parsnips roasted with fresh thyme, ground cumin, and a rich, crispy maple syrup glaze.',
     ingredients: [
       { name: 'Sweet Potatoes (cubed)', amount: '2 medium' },
@@ -411,7 +411,7 @@ export const RECIPES: RecipeItem[] = [
     cookTime: '20 mins',
     servings: 2,
     difficulty: 'Easy',
-    image: '/src/assets/images/poultry_seasoning_1784062724291.jpg',
+    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80',
     description: 'Juicy roasted chicken breast with crispy golden skin, baked with a fragrant lemon pepper rub, basted in melted butter and fresh sage leaves.',
     ingredients: [
       { name: 'Bone-in, Skin-on Chicken Breasts', amount: '2 pieces' },
