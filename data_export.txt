@@ -1,0 +1,111 @@
+SOLO-RECIPES DATA EXPORT - v0.0.3
+
+=== PANTRY INVENTORY ===
+Items marked with [X] are currently in stock.
+
+[X] Garlic (Spices) - Roasted or powdered for deep umami.
+[X] Black Pepper (Spices) - Freshly cracked for a sharp bite.
+[X] Rosemary (Herbs) - Piney aroma that complements seared crusts.
+[ ] Horseradish (Pantry Basics) - Adds a pungent, clearing heat.
+[ ] Chimichurri (Pantry Basics) - Bright parsley and garlic vinegar sauce.
+[ ] Worcestershire (Pantry Basics) - A classic savory flavor enhancer.
+[ ] Sage (Herbs) - Earthy and slightly peppery.
+[ ] Ginger (Spices) - Warmth that pairs well with pork's sweetness.
+[X] Brown Sugar (Pantry Basics) - For caramelization and sweetness.
+[ ] BBQ Sauce (Pantry Basics) - Smoky and sweet glaze.
+[ ] Honey Mustard (Pantry Basics) - Tangy and sweet dipping sauce.
+[ ] Applesauce (Pantry Basics) - Classic fruity accompaniment.
+[X] Thyme (Herbs) - Floral and versatile.
+[ ] Paprika (Spices) - Smoky color and mild sweetness.
+[ ] Tarragon (Herbs) - Slight anise flavor for elegance.
+[ ] Gravy (Pantry Basics) - Rich savory reduction.
+[ ] Garlic Aioli (Pantry Basics) - Creamy and pungent dip.
+[ ] Buffalo Sauce (Pantry Basics) - Tangy vinegar-based heat.
+[ ] Dill (Herbs) - Feathery and citrusy.
+[X] Lemon Zest (Pantry Basics) - Essential bright acidity.
+[ ] Old Bay (Spices) - The quintessential seafood blend.
+[ ] Tartar Sauce (Pantry Basics) - Creamy with a pickle crunch.
+[ ] Malt Vinegar (Pantry Basics) - Classic for fried textures.
+[ ] Cocktail Sauce (Pantry Basics) - Zesty tomato and horseradish.
+[ ] Cumin (Spices) - Adds an earthy depth to roots.
+[ ] Red Pepper Flakes (Spices) - A touch of heat for greens.
+[ ] Nutmeg (Spices) - Traditional for squash and spinach.
+[ ] Balsamic Glaze (Pantry Basics) - Sweet and tart reduction.
+[ ] Tahini (Pantry Basics) - Creamy, nutty sesame paste.
+[ ] Hummus (Pantry Basics) - Savory chickpea spread.
+
+=== RECIPE BANK ===
+
+1. Old Fashioned Apple Pie
+   Ingredients: 3/4 cup Sugar, 2 tbsp Flour, 1/2 tsp Cinnamon, 1/4 tsp Nutmeg, 1/2 tsp Lemon Zest, 7 cups thinly sliced Apples, 2 tsp Lemon Juice, 1 tbsp Butter, 1 recipe Pastry for 9-inch double crust, 4 tbsp Milk
+   Directions:
+   - Preheat oven to 425 degrees F (220 degrees C).
+   - Mix together the sugar, flour, cinnamon, nutmeg and lemon peel.
+   - Line one crust in a 9-inch deep-dish pie pan. Layer 1/3 of apples into pie crust. Sprinkle with sugar mixture and repeat until done. Sprinkle with lemon juice and dot with butter.
+   - Place second pie crust on top of filling and flute the edges. Cut vents in top crust and brush with milk.
+   - Bake at 425 degrees F (220 degrees C) for 40 to 50 minutes.
+
+2. The Best Banana Bread
+   Ingredients: 1 stick Butter, 2 cups Flour, 1/2 tsp Salt, 1 1/2 tsp Baking Powder, 1 cup Sugar, 3 very ripe Bananas, 2 Eggs, 1 tsp Vanilla Extract
+   Directions:
+   - Heat the oven to 350°F. Grease a 9x5-inch loaf pan.
+   - Whisk together the flour, salt, baking powder, and sugar.
+   - Mix together the melted butter and mashed bananas. Beat in the eggs and vanilla. Stir into the dry ingredients.
+   - Pour the batter into the prepared pan. Bake for 50 to 60 minutes.
+
+3. Classic Savory Meatloaf
+   Ingredients: 2 lbs lean ground Beef, 1 (10.75 oz) can Condensed Tomato Soup, 1 Onion, finely diced, 1 cup Rolled Oats, 2 Eggs, beaten, 1/2 cup Ketchup, 3 tbsp Mustard
+   Directions:
+   - In a large bowl, combine meat, soup, onion, oats, and eggs. Mix well.
+   - Shape into a loaf, and pat into a loaf pan.
+   - Bake in a preheated 350 degrees F (175 degrees C) oven for 1 hour.
+
+4. Lemon Garlic Grilled Salmon
+   Ingredients: 4 Salmon Fillets, 2 tbsp Lemon Juice, 2 tbsp Butter, melted, 2 cloves Garlic, minced, 1 tsp dried Dill Weed
+   Directions:
+   - Season salmon fillets with salt and pepper.
+   - Whisk together lemon juice, butter, garlic, and dill.
+   - Grill salmon for 5 to 7 minutes per side, brushing with butter mixture.
+
+5. Creamy Chicken Alfredo
+   Ingredients: 1 lb Fettuccine, 1 lb Chicken Breast, 1/2 cup Butter, 1 pint Heavy Cream, 1/2 cup Parmesan Cheese, 2 cloves Garlic, minced
+   Directions:
+   - Cook pasta according to package directions.
+   - Sauté chicken in butter until cooked through.
+   - Simmer cream and garlic in a pan. Stir in cheese until melted. Toss with pasta and chicken.
+
+6. Hearty Beef Stew
+   Ingredients: 2 lbs Beef Chuck, cubed, 4 large Potatoes, cubed, 4 Carrots, sliced, 1 Onion, chopped, 4 cups Beef Broth, 1 tsp dried Thyme
+   Directions:
+   - Brown beef in a large pot.
+   - Add onion, potatoes, carrots, broth, and thyme.
+   - Simmer on low for 1.5 to 2 hours until meat is tender.
+
+7. Crispy Caesar Salad
+   Ingredients: head Romaine Lettuce, 1 cup Croutons, 1/4 cup Parmesan Cheese, 1/2 cup Caesar Dressing, 1 tsp Black Pepper
+   Directions:
+   - Wash and tear lettuce into bite-sized pieces.
+   - Toss lettuce with dressing until well coated.
+   - Top with croutons, cheese, and freshly cracked black pepper.
+
+8. The Ultimate Chocolate Chip Cookie
+   Ingredients: 1 cup Butter, 1 cup White Sugar, 1 cup Brown Sugar, 2 Eggs, 2 tsp Vanilla Extract, 3 cups Flour, 1 tsp Baking Soda, 2 cups Chocolate Chips
+   Directions:
+   - Preheat oven to 350 degrees F (175 degrees C).
+   - Cream together butter and sugars. Beat in eggs and vanilla.
+   - Mix in dry ingredients and stir in chocolate chips.
+   - Bake for 10 minutes or until edges are golden.
+
+9. Fluffy Buttermilk Pancakes
+   Ingredients: 1 1/2 cups Flour, 1 tbsp Sugar, 1 tsp Salt, 1 tsp Baking Powder, 1/2 tsp Baking Soda, 1 1/4 cups Buttermilk, 1 Egg, 3 tbsp Butter, melted
+   Directions:
+   - Whisk together dry ingredients.
+   - Whisk together buttermilk, egg, and butter. Combine with dry ingredients.
+   - Cook on a lightly oiled griddle until bubbles form and pop.
+
+10. Easy Homemade Guacamole
+    Ingredients: 3 Avocados, mashed, 1 Lime, juiced, 1 tsp Salt, 1/2 cup Onion, diced, 3 tbsp Cilantro, chopped, 2 Roma Tomatoes, diced
+    Directions:
+    - In a medium bowl, mash together the avocados, lime juice, and salt.
+    - Mix in onion, cilantro, and tomatoes.
+    - Refrigerate for 1 hour for best flavor, or serve immediately.

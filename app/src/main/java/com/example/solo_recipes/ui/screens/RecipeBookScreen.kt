@@ -30,6 +30,7 @@ import com.example.solo_recipes.ui.components.AddRecipeDialog
 fun RecipeBookScreen(
     recipes: List<Recipe>,
     allFlavorItems: List<FlavorComponent>,
+    unitSystem: String = "English",
     onAddRecipe: (Recipe) -> Unit,
     onDeleteRecipe: (Recipe) -> Unit
 ) {
@@ -106,14 +107,14 @@ fun RecipeBookScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             items(filteredRecipes) { recipe ->
-                RecipeCard(recipe, allFlavorItems, onDelete = { recipeToDelete = recipe })
+                RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
             }
         }
     }
 }
 
 @Composable
-fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, onDelete: () -> Unit) {
+fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem: String, onDelete: () -> Unit) {
     val seasonings = recipe.ingredients.filter { ing ->
         allFlavorItems.any { flavor ->
             flavor.category != "Pantry Basics" && ing.contains(flavor.name, ignoreCase = true)
@@ -177,7 +178,17 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, onDelete: 
                         fontWeight = FontWeight.Bold
                     )
                 }
+                
+                if (unitSystem == "Metric") {
+                    Text(
+                        "* Metric conversion active",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.Gray,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
             }
         }
     }
 }
+

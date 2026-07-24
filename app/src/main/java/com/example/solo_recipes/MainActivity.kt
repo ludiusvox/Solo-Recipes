@@ -22,6 +22,7 @@ import com.example.solo_recipes.model.FoodCategory
 import com.example.solo_recipes.model.Recipe
 import com.example.solo_recipes.ui.screens.PantryScreen
 import com.example.solo_recipes.ui.screens.RecipeBookScreen
+import com.example.solo_recipes.ui.screens.SettingsScreen
 import com.example.solo_recipes.ui.screens.ShoppingListScreen
 import com.example.solo_recipes.ui.stitcher.FlavorStitcherScreen
 import com.example.solo_recipes.ui.theme.SoloRecipesTheme
@@ -52,10 +53,10 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe>) {
     var currentTab by remember { mutableStateOf("Pantry") }
     var selectedCategory by remember { mutableStateOf<FoodCategory?>(null) }
+    var unitSystem by remember { mutableStateOf("English") } // "English" or "Metric"
     
-    val pantryItems = remember { 
-        mutableStateOf(flavorCategories.flatMap { it.seasonings + it.condiments }.distinctBy { it.name })
-    }
+    val initialPantry = flavorCategories.flatMap { it.seasonings + it.condiments }.distinctBy { it.name }
+    val pantryItems = remember { mutableStateOf(initialPantry) }
     val recipes = remember { mutableStateOf(initialRecipes) }
 
     fun updatePantryItem(updated: FlavorComponent) {
@@ -73,6 +74,11 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
 
     fun deleteRecipe(recipe: Recipe) {
         recipes.value = recipes.value.filter { it.title != recipe.title }
+    }
+
+    fun factoryReset() {
+        pantryItems.value = initialPantry
+        recipes.value = initialRecipes
     }
 
     Scaffold(
@@ -93,7 +99,8 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
                         Triple("Recipes", Icons.Default.MenuBook, "Recipes"),
                         Triple("Pantry", Icons.Default.Kitchen, "Pantry"),
                         Triple("Seasonings", Icons.Default.AutoAwesome, "Seasonings"),
-                        Triple("Shopping", Icons.Default.ShoppingCart, "Shopping")
+                        Triple("Shopping", Icons.Default.ShoppingCart, "Shopping"),
+                        Triple("Settings", Icons.Default.Settings, "Settings")
                     )
                     tabs.forEach { (name, icon, label) ->
                         NavigationBarItem(
@@ -131,6 +138,7 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
                 "Recipes" -> RecipeBookScreen(
                     recipes = recipes.value, 
                     allFlavorItems = pantryItems.value,
+                    unitSystem = unitSystem,
                     onAddRecipe = { recipes.value = recipes.value + it },
                     onDeleteRecipe = { deleteRecipe(it) }
                 )
@@ -153,6 +161,13 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
                     items = pantryItems.value, 
                     onUpdate = { updated -> updatePantryItem(updated) },
                     onDelete = { name -> deletePantryItem(name) }
+                )
+                "Settings" -> SettingsScreen(
+                    unitSystem = unitSystem,
+                    onUnitSystemChange = { unitSystem = it },
+                    pantryItems = pantryItems.value,
+                    recipes = recipes.value,
+                    onFactoryReset = { factoryReset() }
                 )
             }
         }
