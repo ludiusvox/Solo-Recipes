@@ -30,10 +30,10 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun SoloRecipesTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false, // Force light theme for consistent tan background
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val colorScheme = LightColorScheme // Always use light scheme to maintain the tan look
 
     MaterialTheme(
         colorScheme = colorScheme,
