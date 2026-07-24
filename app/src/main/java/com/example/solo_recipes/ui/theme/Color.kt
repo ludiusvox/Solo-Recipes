@@ -2,13 +2,14 @@ package com.example.solo_recipes.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryGreen = Color(0xFF2E7D32)
-val SecondaryBrown = Color(0xFF795548)
-val TertiaryPink = Color(0xFFB14B6F)
-val NeutralGrey = Color(0xFF747970)
+// Warmer green and spice-inspired tones
+val PrimaryGreen = Color(0xFF558B2F) // Warm leafy green
+val SecondaryBrown = Color(0xFF8D6E63) // Warm earthy brown
+val TertiaryPink = Color(0xFFD84315) // Deep Paprika Orange
+val NeutralGrey = Color(0xFF8D6E63)
 
-val BackgroundLight = Color(0xFFF0F2ED)
+val BackgroundLight = Color(0xFFFFF8E1) // Warm cream background
 val SurfaceLight = Color(0xFFFFFFFF)
 
-val PrimaryDark = Color(0xFF1B5E20)
-val SecondaryDark = Color(0xFF4E342E)
+val PrimaryDark = Color(0xFF33691E)
+val SecondaryDark = Color(0xFF5D4037)

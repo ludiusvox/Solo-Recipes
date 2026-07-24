@@ -231,8 +231,8 @@ fun RecipeBookScreen(
             modifier = Modifier.fillMaxWidth().padding(16.dp).clip(RoundedCornerShape(16.dp)),
             leadingIcon = { Icon(Icons.Default.Search, null, tint = Color.Gray) },
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFE5E7E2),
-                unfocusedContainerColor = Color(0xFFE5E7E2),
+                focusedContainerColor = Color(0xFFF0EBE0),
+                unfocusedContainerColor = Color(0xFFF0EBE0),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             )
@@ -291,7 +291,7 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, onDelete: 
                 }
                 
                 Spacer(modifier = Modifier.height(8.dp))
-                HorizontalDivider(color = Color(0xFFF0F0F0))
+                HorizontalDivider(color = Color(0xFFEFEBE9))
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -391,7 +391,7 @@ fun PantryScreen(items: List<FlavorComponent>, allRecipes: List<Recipe>, onItems
                     Row(Modifier.padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                         Text(category, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.width(8.dp))
-                        Surface(color = Color(0xFFE0E0E0), shape = CircleShape) {
+                        Surface(color = Color(0xFFEDE7E3), shape = CircleShape) {
                             Text("${categoryItems.size}", modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall)
                         }
                     }
@@ -416,6 +416,7 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
     var title by remember { mutableStateOf("") }
     var ingredients by remember { mutableStateOf("") }
     var directions by remember { mutableStateOf("") }
+    var imageUrlText by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val tempPhotoUri = remember { mutableStateOf<Uri?>(null) }
     var showPhotoOptions by remember { mutableStateOf(false) }
@@ -452,7 +453,7 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(140.dp).clip(RoundedCornerShape(12.dp)).background(Color(0xFFF0F0F0)).clickable { showPhotoOptions = true },
+                    modifier = Modifier.fillMaxWidth().height(140.dp).clip(RoundedCornerShape(12.dp)).background(Color(0xFFEFEBE9)).clickable { showPhotoOptions = true },
                     contentAlignment = Alignment.Center
                 ) {
                     if (imageUri != null) {
@@ -465,6 +466,7 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
                     }
                 }
                 OutlinedTextField(value = title, onValueChange = { title = it }, label = { Text("Title") }, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(value = imageUrlText, onValueChange = { imageUrlText = it }, label = { Text("Image URL (Optional)") }, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(value = ingredients, onValueChange = { ingredients = it }, label = { Text("Ingredients (comma separated)") }, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(value = directions, onValueChange = { directions = it }, label = { Text("Directions (one per line)") }, modifier = Modifier.fillMaxWidth(), minLines = 3)
             }
@@ -476,7 +478,7 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
                         title = title,
                         ingredients = ingredients.split(",").map { it.trim() }.filter { it.isNotEmpty() },
                         directions = directions.split("\n").map { it.trim() }.filter { it.isNotEmpty() },
-                        image = imageUri?.toString() ?: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800"
+                        image = imageUri?.toString() ?: imageUrlText.takeIf { it.isNotBlank() } ?: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800"
                     ))
                 },
                 enabled = title.isNotBlank()
@@ -514,12 +516,12 @@ fun PantryMatchCard(recipe: Recipe, stockedItems: List<FlavorComponent>) {
                 Text("MATCH", style = MaterialTheme.typography.labelSmall, color = Color.Gray, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.weight(1f))
                 Surface(
-                    color = if (matchPercent > 70) Color(0xFFE8F5E9) else Color(0xFFFFF3E0), 
+                    color = if (matchPercent > 70) Color(0xFFF1F8E9) else Color(0xFFFFF3E0), 
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Text(
                         text = "$matchPercent%", 
-                        color = if (matchPercent > 70) Color(0xFF2E7D32) else Color(0xFFE65100),
+                        color = if (matchPercent > 70) MaterialTheme.colorScheme.primary else Color(0xFFD84315),
                         style = MaterialTheme.typography.labelSmall, 
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), 
                         fontWeight = FontWeight.Bold
@@ -533,17 +535,17 @@ fun PantryMatchCard(recipe: Recipe, stockedItems: List<FlavorComponent>) {
             if (expanded) {
                 Spacer(Modifier.height(16.dp))
                 if (missingIngredients.isNotEmpty()) {
-                    Text("Need to buy:", style = MaterialTheme.typography.labelMedium, color = Color(0xFFB14B6F), fontWeight = FontWeight.Bold)
+                    Text("Need to buy:", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.tertiary, fontWeight = FontWeight.Bold)
                     missingIngredients.forEach { ingredient ->
                         Text("• $ingredient", style = MaterialTheme.typography.bodySmall, color = Color.DarkGray, modifier = Modifier.padding(top = 4.dp))
                     }
                 } else {
-                    Text("You have everything! ✨", style = MaterialTheme.typography.labelMedium, color = Color(0xFF2E7D32), fontWeight = FontWeight.Bold)
+                    Text("You have everything! ✨", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                 }
                 Spacer(Modifier.height(8.dp))
             }
 
-            HorizontalDivider(Modifier.padding(vertical = 12.dp), color = Color(0xFFF0F0F0))
+            HorizontalDivider(Modifier.padding(vertical = 12.dp), color = Color(0xFFEFEBE9))
             Text(
                 text = if (expanded) "Show less" else "View needs ✓", 
                 style = MaterialTheme.typography.labelLarge, 
@@ -658,6 +660,7 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
     val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("Spices") }
+    var imageUrlText by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val tempPhotoUri = remember { mutableStateOf<Uri?>(null) }
     var showPhotoOptions by remember { mutableStateOf(false) }
@@ -696,7 +699,7 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Box(
-                    modifier = Modifier.size(100.dp).clip(CircleShape).background(Color(0xFFF0F0F0)).align(Alignment.CenterHorizontally).clickable { showPhotoOptions = true },
+                    modifier = Modifier.size(100.dp).clip(CircleShape).background(Color(0xFFEFEBE9)).align(Alignment.CenterHorizontally).clickable { showPhotoOptions = true },
                     contentAlignment = Alignment.Center
                 ) {
                     if (imageUri != null) {
@@ -709,6 +712,13 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
                     value = name, 
                     onValueChange = { name = it }, 
                     label = { Text("Name") }, 
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                OutlinedTextField(
+                    value = imageUrlText,
+                    onValueChange = { imageUrlText = it },
+                    label = { Text("Image URL (Optional)") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 )
@@ -727,7 +737,7 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
         },
         confirmButton = { 
             Button(
-                onClick = { onConfirm(FlavorComponent(name = name, category = category, imageUrl = imageUri?.toString())) }, 
+                onClick = { onConfirm(FlavorComponent(name = name, category = category, imageUrl = imageUri?.toString() ?: imageUrlText.takeIf { it.isNotBlank() })) },
                 enabled = name.isNotBlank(),
                 shape = RoundedCornerShape(12.dp)
             ) { Text("Add to Pantry") } 
@@ -800,7 +810,7 @@ fun FlavorItem(component: FlavorComponent, onUpdate: (FlavorComponent) -> Unit, 
         elevation = CardDefaults.cardElevation(1.dp)
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFFF5F5F5)).clickable { showPhotoOptions = true }) {
+            Box(Modifier.size(64.dp).clip(CircleShape).background(Color(0xFFFAF9F6)).clickable { showPhotoOptions = true }) {
                 if (imageUri != null) AsyncImage(model = imageUri, contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
                 else Icon(Icons.Default.AddAPhoto, null, modifier = Modifier.align(Alignment.Center), tint = Color.Gray)
             }
