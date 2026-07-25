@@ -44,7 +44,8 @@ fun PantryScreen(
         AddFlavorItemDialog(
             onDismiss = { showAddItemDialog = false },
             onConfirm = { newItem: FlavorComponent -> 
-                onItemsUpdated(items + newItem.copy(isStocked = true)) 
+                onItemsUpdated(items + newItem.copy(isStocked = true))
+                showAddItemDialog = false
             }
         )
     }

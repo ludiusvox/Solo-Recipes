@@ -31,7 +31,10 @@ fun ShoppingListScreen(
     if (showAddItemDialog) {
         AddFlavorItemDialog(
             onDismiss = { showAddItemDialog = false },
-            onConfirm = { newItem -> onUpdate(newItem.copy(isStocked = false)) }
+            onConfirm = { newItem -> 
+                onUpdate(newItem.copy(isStocked = false))
+                showAddItemDialog = false
+            }
         )
     }
 
