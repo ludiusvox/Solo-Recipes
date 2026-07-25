@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.solo_recipes.data.DataRepository
 import com.example.solo_recipes.data.FlavorDataSource
 import com.example.solo_recipes.data.RecipeDataSource
 import com.example.solo_recipes.model.FlavorComponent
@@ -28,13 +29,21 @@ import com.example.solo_recipes.ui.stitcher.FlavorStitcherScreen
 import com.example.solo_recipes.ui.theme.SoloRecipesTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var dataRepository: DataRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val flavorDataSource = FlavorDataSource(this)
         val recipeDataSource = RecipeDataSource(this)
+        dataRepository = DataRepository(this)
         
         val flavorCategories = flavorDataSource.getFlavorCategories()
-        val initialRecipes = recipeDataSource.getRecipes()
+        val defaultRecipes = recipeDataSource.getRecipes()
+        val defaultPantry = flavorCategories.flatMap { it.seasonings + it.condiments }.distinctBy { it.name }
+        
+        val savedPantry = dataRepository.loadPantry(defaultPantry)
+        val savedRecipes = dataRepository.loadRecipes(defaultRecipes)
+        val savedUnit = dataRepository.loadUnitSystem()
 
         setContent {
             SoloRecipesTheme {
@@ -42,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(flavorCategories, initialRecipes)
+                    MainScreen(flavorCategories, defaultPantry, defaultRecipes, savedPantry, savedRecipes, savedUnit, dataRepository)
                 }
             }
         }
@@ -50,35 +59,51 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe>) {
+fun MainScreen(
+    flavorCategories: List<FoodCategory>,
+    defaultPantry: List<FlavorComponent>,
+    defaultRecipes: List<Recipe>,
+    initialPantry: List<FlavorComponent>,
+    initialRecipes: List<Recipe>,
+    initialUnit: String,
+    repository: DataRepository
+) {
     var currentTab by remember { mutableStateOf("Pantry") }
     var selectedCategory by remember { mutableStateOf<FoodCategory?>(null) }
-    var unitSystem by remember { mutableStateOf("English") } // "English" or "Metric"
+    var unitSystem by remember { mutableStateOf(initialUnit) }
     
-    val initialPantry = flavorCategories.flatMap { it.seasonings + it.condiments }.distinctBy { it.name }
     val pantryItems = remember { mutableStateOf(initialPantry) }
     val recipes = remember { mutableStateOf(initialRecipes) }
 
     fun updatePantryItem(updated: FlavorComponent) {
         val exists = pantryItems.value.any { it.name.equals(updated.name, ignoreCase = true) }
-        if (exists) {
-            pantryItems.value = pantryItems.value.map { if (it.name.equals(updated.name, ignoreCase = true)) updated else it }
+        val newList = if (exists) {
+            pantryItems.value.map { if (it.name.equals(updated.name, ignoreCase = true)) updated else it }
         } else {
-            pantryItems.value = pantryItems.value + updated
+            pantryItems.value + updated
         }
+        pantryItems.value = newList
+        repository.savePantry(newList)
     }
 
     fun deletePantryItem(name: String) {
-        pantryItems.value = pantryItems.value.filter { !it.name.equals(name, ignoreCase = true) }
+        val newList = pantryItems.value.filter { !it.name.equals(name, ignoreCase = true) }
+        pantryItems.value = newList
+        repository.savePantry(newList)
     }
 
     fun deleteRecipe(recipe: Recipe) {
-        recipes.value = recipes.value.filter { it.title != recipe.title }
+        val newList = recipes.value.filter { it.title != recipe.title }
+        recipes.value = newList
+        repository.saveRecipes(newList)
     }
 
     fun factoryReset() {
-        pantryItems.value = initialPantry
-        recipes.value = initialRecipes
+        pantryItems.value = defaultPantry
+        recipes.value = defaultRecipes
+        repository.clearAll()
+        repository.savePantry(defaultPantry)
+        repository.saveRecipes(defaultRecipes)
     }
 
     Scaffold(
@@ -139,13 +164,20 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
                     recipes = recipes.value, 
                     allFlavorItems = pantryItems.value,
                     unitSystem = unitSystem,
-                    onAddRecipe = { recipes.value = recipes.value + it },
+                    onAddRecipe = { 
+                        val newList = recipes.value + it
+                        recipes.value = newList
+                        repository.saveRecipes(newList)
+                    },
                     onDeleteRecipe = { deleteRecipe(it) }
                 )
                 "Pantry" -> PantryScreen(
                     items = pantryItems.value, 
                     allRecipes = recipes.value, 
-                    onItemsUpdated = { updatedItems -> pantryItems.value = updatedItems },
+                    onItemsUpdated = { updatedItems -> 
+                        pantryItems.value = updatedItems
+                        repository.savePantry(updatedItems)
+                    },
                     onDeleteItem = { name -> deletePantryItem(name) }
                 )
                 "Seasonings" -> {
@@ -164,7 +196,10 @@ fun MainScreen(flavorCategories: List<FoodCategory>, initialRecipes: List<Recipe
                 )
                 "Settings" -> SettingsScreen(
                     unitSystem = unitSystem,
-                    onUnitSystemChange = { unitSystem = it },
+                    onUnitSystemChange = { 
+                        unitSystem = it
+                        repository.saveUnitSystem(it)
+                    },
                     pantryItems = pantryItems.value,
                     recipes = recipes.value,
                     onFactoryReset = { factoryReset() }

@@ -1,7 +1,6 @@
 package com.example.solo_recipes.ui.components
 
 import android.net.Uri
-import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -26,9 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
 import com.example.solo_recipes.model.FlavorComponent
+import com.example.solo_recipes.util.createTempFile
+import com.example.solo_recipes.util.saveFileToInternal
+import com.example.solo_recipes.util.saveImageToInternal
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Composable
 fun FlavorItem(
@@ -38,19 +38,21 @@ fun FlavorItem(
 ) {
     val context = LocalContext.current
     var imageUri by remember { mutableStateOf<Uri?>(component.imageUrl?.let { Uri.parse(it) }) }
-    val tempPhotoUri = remember { mutableStateOf<Uri?>(null) }
+    val tempPhotoFile = remember { mutableStateOf<File?>(null) }
     var showPhotoOptions by remember { mutableStateOf(false) }
 
     val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            imageUri = uri
-            onUpdate(component.copy(imageUrl = uri.toString()))
+            val savedUri = saveImageToInternal(context, uri)
+            imageUri = savedUri
+            onUpdate(component.copy(imageUrl = savedUri.toString()))
         }
     }
     val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success && tempPhotoUri.value != null) {
-            imageUri = tempPhotoUri.value
-            onUpdate(component.copy(imageUrl = tempPhotoUri.value.toString()))
+        if (success && tempPhotoFile.value != null) {
+            val savedUri = saveFileToInternal(context, tempPhotoFile.value!!)
+            imageUri = savedUri
+            onUpdate(component.copy(imageUrl = savedUri.toString()))
         }
     }
 
@@ -61,13 +63,9 @@ fun FlavorItem(
             confirmButton = {
                 TextButton(onClick = {
                     showPhotoOptions = false
-                    val photoFile = File.createTempFile(
-                        "IMG_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_",
-                        ".jpg",
-                        context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                    )
-                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
-                    tempPhotoUri.value = uri
+                    val file = createTempFile(context, "IMG")
+                    tempPhotoFile.value = file
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
                     cameraLauncher.launch(uri)
                 }) { Text("Camera") }
             },

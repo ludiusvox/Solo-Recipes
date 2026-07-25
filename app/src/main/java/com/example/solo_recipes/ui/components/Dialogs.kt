@@ -1,7 +1,7 @@
 package com.example.solo_recipes.ui.components
 
+import android.content.Context
 import android.net.Uri
-import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -27,9 +27,10 @@ import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
 import com.example.solo_recipes.model.FlavorComponent
 import com.example.solo_recipes.model.Recipe
+import com.example.solo_recipes.util.createTempFile
+import com.example.solo_recipes.util.saveFileToInternal
+import com.example.solo_recipes.util.saveImageToInternal
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,14 +40,20 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
     var category by remember { mutableStateOf("Spices") }
     var imageUrlText by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-    val tempPhotoUri = remember { mutableStateOf<Uri?>(null) }
+    val tempPhotoFile = remember { mutableStateOf<File?>(null) }
     var showPhotoOptions by remember { mutableStateOf(false) }
 
     val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) imageUri = uri
+        if (uri != null) {
+            val savedUri = saveImageToInternal(context, uri)
+            imageUri = savedUri
+        }
     }
     val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success && tempPhotoUri.value != null) imageUri = tempPhotoUri.value
+        if (success && tempPhotoFile.value != null) {
+            val savedUri = saveFileToInternal(context, tempPhotoFile.value!!)
+            imageUri = savedUri
+        }
     }
 
     if (showPhotoOptions) {
@@ -56,13 +63,9 @@ fun AddFlavorItemDialog(onDismiss: () -> Unit, onConfirm: (FlavorComponent) -> U
             confirmButton = {
                 TextButton(onClick = {
                     showPhotoOptions = false
-                    val photoFile = File.createTempFile(
-                        "FLAVOR_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_",
-                        ".jpg",
-                        context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                    )
-                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
-                    tempPhotoUri.value = uri
+                    val file = createTempFile(context, "FLAVOR")
+                    tempPhotoFile.value = file
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
                     cameraLauncher.launch(uri)
                 }) { Text("Camera") }
             },
@@ -156,14 +159,20 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
     var directions by remember { mutableStateOf("") }
     var imageUrlText by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-    val tempPhotoUri = remember { mutableStateOf<Uri?>(null) }
+    val tempPhotoFile = remember { mutableStateOf<File?>(null) }
     var showPhotoOptions by remember { mutableStateOf(false) }
 
     val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) imageUri = uri
+        if (uri != null) {
+            val savedUri = saveImageToInternal(context, uri)
+            imageUri = savedUri
+        }
     }
     val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success && tempPhotoUri.value != null) imageUri = tempPhotoUri.value
+        if (success && tempPhotoFile.value != null) {
+            val savedUri = saveFileToInternal(context, tempPhotoFile.value!!)
+            imageUri = savedUri
+        }
     }
 
     if (showPhotoOptions) {
@@ -173,13 +182,9 @@ fun AddRecipeDialog(onDismiss: () -> Unit, onConfirm: (Recipe) -> Unit) {
             confirmButton = {
                 TextButton(onClick = {
                     showPhotoOptions = false
-                    val photoFile = File.createTempFile(
-                        "RECIPE_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_",
-                        ".jpg",
-                        context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                    )
-                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", photoFile)
-                    tempPhotoUri.value = uri
+                    val file = createTempFile(context, "RECIPE")
+                    tempPhotoFile.value = file
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
                     cameraLauncher.launch(uri)
                 }) { Text("Camera") }
             },
