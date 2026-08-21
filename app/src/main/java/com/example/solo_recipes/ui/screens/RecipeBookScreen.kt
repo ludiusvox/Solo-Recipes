@@ -1,5 +1,6 @@
 package com.example.solo_recipes.ui.screens
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,6 +39,8 @@ fun RecipeBookScreen(
     var showAddDialog by remember { mutableStateOf(false) }
     var recipeToDelete by remember { mutableStateOf<Recipe?>(null) }
     val filteredRecipes = recipes.filter { it.title.contains(searchQuery, ignoreCase = true) }
+    val ancientRecipes = filteredRecipes.filter { !it.latinTitle.isNullOrEmpty() }
+    val newRecipes = filteredRecipes.filter { it.latinTitle.isNullOrEmpty() }
 
     if (showAddDialog) {
         AddRecipeDialog(
@@ -106,8 +109,34 @@ fun RecipeBookScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            items(filteredRecipes) { recipe ->
-                RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
+            if (newRecipes.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Modern Recipes",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                    )
+                }
+                items(newRecipes) { recipe ->
+                    RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
+                }
+            }
+
+            if (ancientRecipes.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Ancient Recipes",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+                    )
+                }
+                items(ancientRecipes) { recipe ->
+                    RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
+                }
             }
         }
     }
@@ -115,6 +144,7 @@ fun RecipeBookScreen(
 
 @Composable
 fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem: String, onDelete: () -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
     val seasonings = recipe.ingredients.filter { ing ->
         allFlavorItems.any { flavor ->
             flavor.category != "Pantry Basics" && ing.contains(flavor.name, ignoreCase = true)
@@ -122,21 +152,40 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .animateContentSize(),
         shape = RoundedCornerShape(32.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column {
             Box {
-                AsyncImage(
-                    model = recipe.image,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp),
-                    contentScale = ContentScale.Crop
-                )
+                if (!recipe.image.isNullOrEmpty()) {
+                    AsyncImage(
+                        model = recipe.image,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp)
+                            .background(Color(0xFFF5F5F5)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            Icons.Default.MenuBook,
+                            contentDescription = null,
+                            modifier = Modifier.size(64.dp),
+                            tint = Color.LightGray
+                        )
+                    }
+                }
                 IconButton(
                     onClick = onDelete,
                     modifier = Modifier
@@ -149,6 +198,15 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
             }
             Column(modifier = Modifier.padding(24.dp)) {
                 Text(text = recipe.title, style = MaterialTheme.typography.headlineMedium, color = Color.Black)
+                
+                if (!recipe.latinTitle.isNullOrEmpty()) {
+                    Text(
+                        text = recipe.latinTitle,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = Color.Gray,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
 
                 if (seasonings.isNotEmpty()) {
                     Spacer(modifier = Modifier.height(12.dp))
@@ -164,19 +222,58 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
                 HorizontalDivider(color = Color(0xFFEFEBE9))
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text(
                         "${recipe.ingredients.size} Ingredients | ${recipe.directions.size} Steps",
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.Gray,
                         modifier = Modifier.weight(1f)
                     )
+                    TextButton(onClick = { expanded = !expanded }) {
+                        Text(
+                            if (expanded) "Close recipe ✕" else "View recipe ✓",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                if (expanded) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        "View recipe ✓",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold
+                        text = "Ingredients",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
+                    recipe.ingredients.forEach { ingredient ->
+                        Text(
+                            text = "• $ingredient",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.DarkGray,
+                            modifier = Modifier.padding(vertical = 2.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Directions",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                    recipe.directions.forEachIndexed { index, step ->
+                        Text(
+                            text = "${index + 1}. $step",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.DarkGray,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                    }
                 }
                 
                 if (unitSystem == "Metric") {
@@ -184,7 +281,7 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
                         "* Metric conversion active",
                         style = MaterialTheme.typography.labelSmall,
                         color = Color.Gray,
-                        modifier = Modifier.padding(top = 4.dp)
+                        modifier = Modifier.padding(top = 8.dp)
                     )
                 }
             }

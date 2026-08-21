@@ -17,8 +17,6 @@ class RecipeDataSource(private val context: Context) {
             val jsonString = context.assets.open("recipes.json").bufferedReader().use { it.readText() }
             val response = json.decodeFromString<RecipeResponse>(jsonString)
             response.recipes
-        } catch (e: IOException) {
-            emptyList()
         } catch (e: Exception) {
             emptyList()
         }

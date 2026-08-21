@@ -26,3 +26,6 @@ This is your solo journey into mastering flavor. It's about removing the guesswo
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Bibliography
+- **Apicius** (attributed). *Cookery and Dining in Imperial Rome (De Re Coquinaria)*. Translated by Joseph Dommers Vehling. Project Gutenberg, EBook #29728, August 19, 2009. [https://www.gutenberg.org/ebooks/29728](https://www.gutenberg.org/ebooks/29728)

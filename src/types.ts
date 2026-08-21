@@ -26,23 +26,27 @@ export interface PantryItem {
 export interface RecipeItem {
   id: string;
   title: string;
-  tagline: string;
-  category: 'beef' | 'seafood' | 'greens' | 'root_veg' | 'poultry';
-  prepTime: string;
-  cookTime: string;
-  servings: number;
-  difficulty: 'Easy' | 'Medium' | 'Chef';
-  image: string;
-  description: string;
-  ingredients: { name: string; amount: string }[];
-  seasoningsUsed: string[]; // references to SeasoningItem.name or id
-  steps: string[];
-  nutrition: {
+  tagline?: string;
+  category?: 'beef' | 'seafood' | 'greens' | 'root_veg' | 'poultry';
+  prepTime?: string;
+  cookTime?: string;
+  servings?: number;
+  difficulty?: 'Easy' | 'Medium' | 'Chef';
+  image?: string;
+  description?: string;
+  ingredients: { name: string; amount: string }[] | string[];
+  seasoningsUsed?: string[]; // references to SeasoningItem.name or id
+  steps?: string[];
+  nutrition?: {
     calories: string;
     protein: string;
     carbs: string;
     fat: string;
   };
+
+  // New fields from app/src/main/assets/recipes.json
+  latinTitle?: string;
+  directions: string | string[];
 }
 
 export interface CategoryDetail {
@@ -53,4 +57,9 @@ export interface CategoryDetail {
   badge: string;
   image: string;
   seasonings: SeasoningItem[];
+}
+
+// Interface for the root JSON structure if you parse it directly
+export interface RecipesJson {
+  recipes: RecipeItem[];
 }
