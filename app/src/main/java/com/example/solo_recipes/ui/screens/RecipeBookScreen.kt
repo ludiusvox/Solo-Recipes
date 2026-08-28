@@ -10,18 +10,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.solo_recipes.model.FlavorComponent
 import com.example.solo_recipes.model.Recipe
 import com.example.solo_recipes.ui.components.AddRecipeDialog
@@ -73,52 +71,78 @@ fun RecipeBookScreen(
     }
 
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("Recipe Book", style = MaterialTheme.typography.displayLarge) },
-            actions = {
-                Box(modifier = Modifier.padding(end = 16.dp)) {
-                    IconButton(
-                        onClick = { showAddDialog = true },
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape)
-                    ) {
-                        Icon(Icons.Default.Add, "Add Recipe", tint = MaterialTheme.colorScheme.primary)
-                    }
-                }
-            },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
-        )
-        TextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            placeholder = { Text("Search recipes...", style = MaterialTheme.typography.bodyLarge) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clip(RoundedCornerShape(16.dp)),
-            leadingIcon = { Icon(Icons.Default.Search, null, tint = Color.Gray) },
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFF0EBE0),
-                unfocusedContainerColor = Color(0xFFF0EBE0),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
-        )
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            if (newRecipes.isNotEmpty()) {
-                item {
-                    Text(
-                        text = "Modern Recipes",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
-                    )
+            item {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
+                    ),
+                    elevation = CardDefaults.cardElevation(0.dp)
+                ) {
+                    Column(Modifier.padding(20.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = "Recipe Book",
+                                style = MaterialTheme.typography.displayLarge.copy(
+                                    brush = Brush.linearGradient(
+                                        colors = listOf(
+                                            MaterialTheme.colorScheme.primary,
+                                            MaterialTheme.colorScheme.tertiary
+                                        )
+                                    )
+                                ),
+                                modifier = Modifier.weight(1f)
+                            )
+                            IconButton(
+                                onClick = { showAddDialog = true },
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .background(MaterialTheme.colorScheme.primary, CircleShape)
+                            ) {
+                                Icon(Icons.Default.Add, "Add Recipe", tint = Color.White)
+                            }
+                        }
+
+                        Spacer(Modifier.height(16.dp))
+
+                        TextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            placeholder = { Text("Search recipes...", style = MaterialTheme.typography.bodyLarge) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(16.dp)),
+                            leadingIcon = { Icon(Icons.Default.Search, null, tint = Color.Gray) },
+                            colors = TextFieldDefaults.colors(
+                                focusedContainerColor = Color(0xFFF0EBE0).copy(alpha = 0.45f),
+                                unfocusedContainerColor = Color(0xFFF0EBE0).copy(alpha = 0.45f),
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent
+                            )
+                        )
+
+                        if (newRecipes.isNotEmpty()) {
+                            Spacer(Modifier.height(24.dp))
+                            Text(
+                                text = "Modern Recipes",
+                                style = MaterialTheme.typography.headlineSmall,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                 }
+            }
+
+            if (newRecipes.isNotEmpty()) {
                 items(newRecipes) { recipe ->
                     RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
                 }
@@ -155,135 +179,112 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
         modifier = Modifier
             .fillMaxWidth()
             .animateContentSize(),
-        shape = RoundedCornerShape(32.dp),
-        elevation = CardDefaults.cardElevation(2.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        shape = RoundedCornerShape(24.dp),
+        elevation = CardDefaults.cardElevation(1.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.9f))
     ) {
-        Column {
-            Box {
-                if (!recipe.image.isNullOrEmpty()) {
-                    AsyncImage(
-                        model = recipe.image,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(220.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(220.dp)
-                            .background(Color(0xFFF5F5F5)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            Icons.Default.MenuBook,
-                            contentDescription = null,
-                            modifier = Modifier.size(64.dp),
-                            tint = Color.LightGray
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = recipe.title, style = MaterialTheme.typography.titleLarge, color = Color.Black)
+
+                    if (!recipe.latinTitle.isNullOrEmpty()) {
+                        Text(
+                            text = recipe.latinTitle,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.Gray,
+                            modifier = Modifier.padding(top = 2.dp)
                         )
                     }
                 }
-                IconButton(
-                    onClick = onDelete,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(16.dp)
-                        .background(Color.Black.copy(alpha = 0.3f), CircleShape)
-                ) {
-                    Icon(Icons.Default.Delete, contentDescription = "Delete Recipe", tint = Color.White)
+                IconButton(onClick = onDelete) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Delete Recipe",
+                        tint = Color.LightGray,
+                        modifier = Modifier.size(20.dp)
+                    )
                 }
             }
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text(text = recipe.title, style = MaterialTheme.typography.headlineMedium, color = Color.Black)
-                
-                if (!recipe.latinTitle.isNullOrEmpty()) {
-                    Text(
-                        text = recipe.latinTitle,
-                        style = MaterialTheme.typography.titleSmall,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
-                }
 
-                if (seasonings.isNotEmpty()) {
-                    Spacer(modifier = Modifier.height(12.dp))
+            if (seasonings.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Seasonings: ${seasonings.joinToString(", ")}",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+            HorizontalDivider(color = Color(0xFFEFEBE9))
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    "${recipe.ingredients.size} Ingredients | ${recipe.directions.size} Steps",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
+                TextButton(onClick = { expanded = !expanded }) {
                     Text(
-                        text = "Seasonings: ${seasonings.joinToString(", ")}",
-                        style = MaterialTheme.typography.labelSmall,
+                        if (expanded) "Close ✕" else "View ✓",
+                        style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            if (expanded) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Ingredients",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+                recipe.ingredients.forEach { ingredient ->
+                    Text(
+                        text = "• $ingredient",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.DarkGray,
+                        modifier = Modifier.padding(vertical = 1.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
-                HorizontalDivider(color = Color(0xFFEFEBE9))
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Directions",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+                recipe.directions.forEachIndexed { index, step ->
                     Text(
-                        "${recipe.ingredients.size} Ingredients | ${recipe.directions.size} Steps",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray,
-                        modifier = Modifier.weight(1f)
-                    )
-                    TextButton(onClick = { expanded = !expanded }) {
-                        Text(
-                            if (expanded) "Close recipe ✕" else "View recipe ✓",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-
-                if (expanded) {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Ingredients",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                    recipe.ingredients.forEach { ingredient ->
-                        Text(
-                            text = "• $ingredient",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.DarkGray,
-                            modifier = Modifier.padding(vertical = 2.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Directions",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                    recipe.directions.forEachIndexed { index, step ->
-                        Text(
-                            text = "${index + 1}. $step",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.DarkGray,
-                            modifier = Modifier.padding(vertical = 4.dp)
-                        )
-                    }
-                }
-                
-                if (unitSystem == "Metric") {
-                    Text(
-                        "* Metric conversion active",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(top = 8.dp)
+                        text = "${index + 1}. $step",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.DarkGray,
+                        modifier = Modifier.padding(vertical = 2.dp)
                     )
                 }
+            }
+            
+            if (unitSystem == "Metric") {
+                Text(
+                    "* Metric conversion active",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
             }
         }
     }

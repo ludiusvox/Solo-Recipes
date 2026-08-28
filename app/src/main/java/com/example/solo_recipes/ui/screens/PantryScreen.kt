@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -51,75 +52,92 @@ fun PantryScreen(
     }
 
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = {
-                Text(
-                    "My Pantry Stock",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            },
-            actions = {
-                Box(modifier = Modifier.padding(end = 16.dp)) {
-                    IconButton(
-                        onClick = { showAddItemDialog = true },
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(MaterialTheme.colorScheme.primary, CircleShape)
-                    ) {
-                        Icon(Icons.Default.Add, null, tint = Color.White)
-                    }
-                }
-            },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
-        )
-
-        LazyColumn(contentPadding = PaddingValues(bottom = 16.dp)) {
+        LazyColumn(contentPadding = PaddingValues(16.dp)) {
             item {
-                Column(Modifier.padding(horizontal = 24.dp, vertical = 16.dp)) {
-                    Text(
-                        "Kitchen Inventory",
-                        style = MaterialTheme.typography.displayLarge,
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                    Text(
-                        "Manage your seasonings and spices to automatically match recipes.",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Gray
-                    )
-
-                    Spacer(Modifier.height(20.dp))
-                    Surface(
-                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
-                        shape = RoundedCornerShape(16.dp),
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
-                    ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
+                    ),
+                    elevation = CardDefaults.cardElevation(0.dp)
+                ) {
+                    Column(Modifier.padding(20.dp)) {
                         Row(
-                            Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Icon(
-                                Icons.Default.CalendarToday,
-                                null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(Modifier.width(12.dp))
                             Text(
-                                "$stockedCount Stocked Items",
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary
+                                "My Pantry Stock",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.weight(1f)
                             )
+                            IconButton(
+                                onClick = { showAddItemDialog = true },
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .background(MaterialTheme.colorScheme.primary, CircleShape)
+                            ) {
+                                Icon(Icons.Default.Add, null, tint = Color.White)
+                            }
                         }
-                    }
 
-                    Spacer(Modifier.height(32.dp))
-                    Text(
-                        "✨ Active Recipes Matched",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(Modifier.height(16.dp))
+                        Spacer(Modifier.height(16.dp))
+                        Text(
+                            "Kitchen Inventory",
+                            style = MaterialTheme.typography.displayLarge.copy(
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.primary,
+                                        MaterialTheme.colorScheme.tertiary
+                                    )
+                                )
+                            ),
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            "Manage seasonings to match recipes.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.DarkGray
+                        )
+
+                        Spacer(Modifier.height(16.dp))
+                        Surface(
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f)
+                        ) {
+                            Row(
+                                Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    Icons.Default.CalendarToday,
+                                    null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(Modifier.width(8.dp))
+                                Text(
+                                    "$stockedCount Stocked Items",
+                                    style = MaterialTheme.typography.labelLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+
+                        Spacer(Modifier.height(24.dp))
+                        Text(
+                            "✨ Active Recipes Matched",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
             }
 
@@ -146,8 +164,8 @@ fun PantryScreen(
                             .clip(RoundedCornerShape(16.dp)),
                         leadingIcon = { Icon(Icons.Default.Search, null, tint = Color.Gray) },
                         colors = TextFieldDefaults.colors(
-                            focusedContainerColor = Color.White,
-                            unfocusedContainerColor = Color.White,
+                            focusedContainerColor = Color.White.copy(alpha = 0.8f),
+                            unfocusedContainerColor = Color.White.copy(alpha = 0.8f),
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent
                         )
@@ -210,7 +228,7 @@ fun PantryMatchCard(recipe: Recipe, stockedItems: List<FlavorComponent>) {
             .width(280.dp)
             .animateContentSize(),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.9f)),
         elevation = CardDefaults.cardElevation(2.dp),
         onClick = { expanded = !expanded }
     ) {
@@ -294,7 +312,7 @@ fun PantryItemRow(item: FlavorComponent, onToggle: (FlavorComponent) -> Unit, on
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        color = Color.White,
+        color = Color.White.copy(alpha = 0.8f),
         shadowElevation = 1.dp
     ) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {

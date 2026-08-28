@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -18,20 +19,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.solo_recipes.data.DataRepository
 import com.example.solo_recipes.data.FlavorDataSource
 import com.example.solo_recipes.data.RecipeDataSource
 import com.example.solo_recipes.model.FlavorComponent
-import com.example.solo_recipes.model.FoodCategory
 import com.example.solo_recipes.model.Recipe
 import com.example.solo_recipes.ui.screens.PantryScreen
 import com.example.solo_recipes.ui.screens.RecipeBookScreen
 import com.example.solo_recipes.ui.screens.SettingsScreen
 import com.example.solo_recipes.ui.screens.ShoppingListScreen
-import com.example.solo_recipes.ui.stitcher.FlavorStitcherScreen
 import com.example.solo_recipes.ui.theme.SoloRecipesTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,11 +54,18 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SoloRecipesTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val context = LocalContext.current
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Image(
+                        painter = painterResource(id = R.drawable.feast_background),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background.copy(alpha = 0.6f)
+                    ) {
+                        val context = LocalContext.current
                     var hasCameraPermission by remember { 
                         mutableStateOf(
                             ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
@@ -76,16 +84,16 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    MainScreen(flavorCategories, defaultPantry, defaultRecipes, savedPantry, savedRecipes, savedUnit, dataRepository)
+                    MainScreen(defaultPantry, defaultRecipes, savedPantry, savedRecipes, savedUnit, dataRepository)
                 }
             }
         }
     }
 }
+}
 
 @Composable
 fun MainScreen(
-    flavorCategories: List<FoodCategory>,
     defaultPantry: List<FlavorComponent>,
     defaultRecipes: List<Recipe>,
     initialPantry: List<FlavorComponent>,
@@ -94,7 +102,6 @@ fun MainScreen(
     repository: DataRepository
 ) {
     var currentTab by remember { mutableStateOf("Pantry") }
-    var selectedCategory by remember { mutableStateOf<FoodCategory?>(null) }
     var unitSystem by remember { mutableStateOf(initialUnit) }
     
     val pantryItems = remember { mutableStateOf(initialPantry) }
@@ -132,6 +139,7 @@ fun MainScreen(
     }
 
     Scaffold(
+        containerColor = Color.Transparent,
         bottomBar = {
             Surface(
                 modifier = Modifier
@@ -148,14 +156,13 @@ fun MainScreen(
                     val tabs = listOf(
                         Triple("Recipes", Icons.Default.MenuBook, "Recipes"),
                         Triple("Pantry", Icons.Default.Kitchen, "Pantry"),
-                        Triple("Seasonings", Icons.Default.AutoAwesome, "Seasonings"),
                         Triple("Shopping", Icons.Default.ShoppingCart, "Shopping"),
                         Triple("Settings", Icons.Default.Settings, "Settings")
                     )
                     tabs.forEach { (name, icon, label) ->
                         NavigationBarItem(
                             selected = currentTab == name,
-                            onClick = { currentTab = name; selectedCategory = null },
+                            onClick = { currentTab = name },
                             icon = { 
                                 Box(
                                     modifier = Modifier
@@ -183,7 +190,7 @@ fun MainScreen(
             }
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding).background(MaterialTheme.colorScheme.background)) {
+        Box(modifier = Modifier.padding(padding)) {
             when (currentTab) {
                 "Recipes" -> RecipeBookScreen(
                     recipes = recipes.value, 
@@ -205,15 +212,6 @@ fun MainScreen(
                     },
                     onDeleteItem = { name -> deletePantryItem(name) }
                 )
-                "Seasonings" -> {
-                    FlavorStitcherScreen(
-                        categories = flavorCategories,
-                        selectedCategory = selectedCategory,
-                        onCategorySelected = { selectedCategory = it },
-                        pantryItems = pantryItems.value,
-                        onUpdatePantryItem = { updatePantryItem(it) }
-                    )
-                }
                 "Shopping" -> ShoppingListScreen(
                     items = pantryItems.value, 
                     onUpdate = { updated -> updatePantryItem(updated) },

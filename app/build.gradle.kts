@@ -12,8 +12,8 @@ android {
         applicationId = "com.example.solo_recipes"
         minSdk = 36
         targetSdk = 37
-        versionCode = 3
-        versionName = "0.0.3"
+        versionCode = 5
+        versionName = "0.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
