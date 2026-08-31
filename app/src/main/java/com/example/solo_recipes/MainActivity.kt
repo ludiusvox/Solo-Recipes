@@ -49,7 +49,18 @@ class MainActivity : ComponentActivity() {
         val defaultPantry = flavorCategories.flatMap { it.seasonings + it.condiments }.distinctBy { it.name }
         
         val savedPantry = dataRepository.loadPantry(defaultPantry)
-        val savedRecipes = dataRepository.loadRecipes(defaultRecipes)
+        
+        // Force merge pilgrim recipes if they aren't in the saved list
+        val loadedRecipes = dataRepository.loadRecipes(defaultRecipes)
+        val pilgrimTitles = defaultRecipes.filter { it.isPilgrim }.map { it.title }.toSet()
+        val hasPilgrim = loadedRecipes.any { it.isPilgrim || pilgrimTitles.contains(it.title) }
+        
+        val savedRecipes = if (!hasPilgrim) {
+            loadedRecipes + defaultRecipes.filter { it.isPilgrim }
+        } else {
+            loadedRecipes
+        }
+        
         val savedUnit = dataRepository.loadUnitSystem()
 
         setContent {

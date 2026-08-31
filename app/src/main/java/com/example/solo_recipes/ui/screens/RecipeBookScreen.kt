@@ -38,7 +38,10 @@ fun RecipeBookScreen(
     var recipeToDelete by remember { mutableStateOf<Recipe?>(null) }
     val filteredRecipes = recipes.filter { it.title.contains(searchQuery, ignoreCase = true) }
     val ancientRecipes = filteredRecipes.filter { !it.latinTitle.isNullOrEmpty() }
-    val newRecipes = filteredRecipes.filter { it.latinTitle.isNullOrEmpty() }
+    val pilgrimRecipes = filteredRecipes.filter { it.isPilgrim || it.source == "Pilgrim Cook Book" }
+    val newRecipes = filteredRecipes.filter { 
+        it.latinTitle.isNullOrEmpty() && !it.isPilgrim && it.source != "Pilgrim Cook Book" 
+    }
 
     if (showAddDialog) {
         AddRecipeDialog(
@@ -148,6 +151,34 @@ fun RecipeBookScreen(
                 }
             }
 
+            if (pilgrimRecipes.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Pilgrims Cookbook",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+                    )
+                }
+
+                val grouped = pilgrimRecipes.groupBy { it.tags.firstOrNull() ?: "General" }
+                grouped.forEach { (category, categoryRecipes) ->
+                    item {
+                        Text(
+                            text = category,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.secondary,
+                            modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                        )
+                    }
+                    items(categoryRecipes) { recipe ->
+                        RecipeCard(recipe, allFlavorItems, unitSystem, onDelete = { recipeToDelete = recipe })
+                    }
+                }
+            }
+
             if (ancientRecipes.isNotEmpty()) {
                 item {
                     Text(
@@ -198,6 +229,24 @@ fun RecipeCard(recipe: Recipe, allFlavorItems: List<FlavorComponent>, unitSystem
                             color = Color.Gray,
                             modifier = Modifier.padding(top = 2.dp)
                         )
+                    }
+
+                    if (recipe.isPilgrim) {
+                        val subtitle = buildString {
+                            if (recipe.tags.isNotEmpty()) append(recipe.tags.first())
+                            if (!recipe.author.isNullOrEmpty()) {
+                                if (isNotEmpty()) append(" • ")
+                                append(recipe.author)
+                            }
+                        }
+                        if (subtitle.isNotEmpty()) {
+                            Text(
+                                text = subtitle,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = Color.Gray,
+                                modifier = Modifier.padding(top = 2.dp)
+                            )
+                        }
                     }
                 }
                 IconButton(onClick = onDelete) {

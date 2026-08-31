@@ -46,7 +46,9 @@ data class Recipe(
     val source: String? = null,
     val tags: List<String> = emptyList(),
     val url: String? = null,
-    val image: String? = null
+    val image: String? = null,
+    val author: String? = null,
+    val isPilgrim: Boolean = false
 )
 
 @Serializable
