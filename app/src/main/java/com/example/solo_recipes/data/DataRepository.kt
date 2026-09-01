@@ -12,6 +12,7 @@ class DataRepository(private val context: Context) {
     private val pantryFile = File(context.filesDir, "pantry_v2.json")
     private val recipesFile = File(context.filesDir, "recipes_v2.json")
     private val settingsFile = File(context.filesDir, "settings.json")
+    private val shoppingFile = File(context.filesDir, "shopping_list.json")
 
     fun savePantry(items: List<FlavorComponent>) {
         pantryFile.writeText(json.encodeToString(items))
@@ -53,10 +54,27 @@ class DataRepository(private val context: Context) {
         return if (settingsFile.exists()) settingsFile.readText() else "English"
     }
 
+    fun saveShoppingList(list: Map<String, List<String>>) {
+        shoppingFile.writeText(json.encodeToString(list))
+    }
+
+    fun loadShoppingList(): Map<String, List<String>> {
+        return if (shoppingFile.exists()) {
+            try {
+                json.decodeFromString(shoppingFile.readText())
+            } catch (e: Exception) {
+                emptyMap()
+            }
+        } else {
+            emptyMap()
+        }
+    }
+
     fun clearAll() {
         pantryFile.delete()
         recipesFile.delete()
         settingsFile.delete()
+        shoppingFile.delete()
         val imageDir = File(context.filesDir, "images")
         if (imageDir.exists()) {
             imageDir.deleteRecursively()

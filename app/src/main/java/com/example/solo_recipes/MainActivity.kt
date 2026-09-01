@@ -62,6 +62,7 @@ class MainActivity : ComponentActivity() {
         }
         
         val savedUnit = dataRepository.loadUnitSystem()
+        val savedShoppingList = dataRepository.loadShoppingList()
 
         setContent {
             SoloRecipesTheme {
@@ -95,7 +96,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    MainScreen(defaultPantry, defaultRecipes, savedPantry, savedRecipes, savedUnit, dataRepository)
+                    MainScreen(defaultPantry, defaultRecipes, savedPantry, savedRecipes, savedUnit, savedShoppingList, dataRepository)
                 }
             }
         }
@@ -110,6 +111,7 @@ fun MainScreen(
     initialPantry: List<FlavorComponent>,
     initialRecipes: List<Recipe>,
     initialUnit: String,
+    initialShoppingList: Map<String, List<String>>,
     repository: DataRepository
 ) {
     var currentTab by remember { mutableStateOf("Pantry") }
@@ -117,6 +119,7 @@ fun MainScreen(
     
     val pantryItems = remember { mutableStateOf(initialPantry) }
     val recipes = remember { mutableStateOf(initialRecipes) }
+    val shoppingList = remember { mutableStateOf(initialShoppingList) }
 
     fun updatePantryItem(updated: FlavorComponent) {
         val exists = pantryItems.value.any { it.name.equals(updated.name, ignoreCase = true) }
@@ -216,7 +219,6 @@ fun MainScreen(
                 )
                 "Pantry" -> PantryScreen(
                     items = pantryItems.value, 
-                    allRecipes = recipes.value, 
                     onItemsUpdated = { updatedItems -> 
                         pantryItems.value = updatedItems
                         repository.savePantry(updatedItems)
@@ -224,9 +226,11 @@ fun MainScreen(
                     onDeleteItem = { name -> deletePantryItem(name) }
                 )
                 "Shopping" -> ShoppingListScreen(
-                    items = pantryItems.value, 
-                    onUpdate = { updated -> updatePantryItem(updated) },
-                    onDelete = { name -> deletePantryItem(name) }
+                    shoppingList = shoppingList.value,
+                    onUpdate = { updated ->
+                        shoppingList.value = updated
+                        repository.saveShoppingList(updated)
+                    }
                 )
                 "Settings" -> SettingsScreen(
                     unitSystem = unitSystem,

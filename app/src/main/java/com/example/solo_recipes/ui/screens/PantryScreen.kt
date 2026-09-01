@@ -7,7 +7,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,7 +31,6 @@ import com.example.solo_recipes.ui.components.AddFlavorItemDialog
 @Composable
 fun PantryScreen(
     items: List<FlavorComponent>,
-    allRecipes: List<Recipe>,
     onItemsUpdated: (List<FlavorComponent>) -> Unit,
     onDeleteItem: (String) -> Unit
 ) {
@@ -129,26 +127,6 @@ fun PantryScreen(
                                 )
                             }
                         }
-
-                        Spacer(Modifier.height(24.dp))
-                        Text(
-                            "✨ Active Recipes Matched",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
-
-            item {
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = 24.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.Top
-                ) {
-                    items(allRecipes) { recipe ->
-                        PantryMatchCard(recipe, items)
                     }
                 }
             }
@@ -205,104 +183,6 @@ fun PantryScreen(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun PantryMatchCard(recipe: Recipe, stockedItems: List<FlavorComponent>) {
-    var expanded by remember { mutableStateOf(false) }
-
-    val missingIngredients = recipe.ingredients.filter { ing ->
-        !stockedItems.any { flavor ->
-            (ing.contains(flavor.name, ignoreCase = true) || flavor.name.contains(ing, ignoreCase = true)) && flavor.isStocked
-        }
-    }
-
-    val totalCount = recipe.ingredients.size
-    val ownedCount = totalCount - missingIngredients.size
-    val matchPercent = if (totalCount > 0) (ownedCount * 100 / totalCount) else 0
-
-    Card(
-        modifier = Modifier
-            .width(280.dp)
-            .animateContentSize(),
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.9f)),
-        elevation = CardDefaults.cardElevation(2.dp),
-        onClick = { expanded = !expanded }
-    ) {
-        Column(Modifier.padding(20.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    "MATCH",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = Color.Gray,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(Modifier.weight(1f))
-                Surface(
-                    color = if (matchPercent > 70) Color(0xFFF1F8E9) else Color(0xFFFFF3E0),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Text(
-                        text = "$matchPercent%",
-                        color = if (matchPercent > 70) MaterialTheme.colorScheme.primary else Color(0xFFD84315),
-                        style = MaterialTheme.typography.labelSmall,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
-            Spacer(Modifier.height(8.dp))
-            Text(
-                recipe.title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.ExtraBold,
-                maxLines = 1
-            )
-            Text(
-                "You have $ownedCount of $totalCount ingredients.",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.Gray
-            )
-
-            if (expanded) {
-                Spacer(Modifier.height(16.dp))
-                if (missingIngredients.isNotEmpty()) {
-                    Text(
-                        "Need to buy:",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.tertiary,
-                        fontWeight = FontWeight.Bold
-                    )
-                    missingIngredients.forEach { ingredient ->
-                        Text(
-                            "• $ingredient",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.DarkGray,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
-                    }
-                } else {
-                    Text(
-                        "You have everything! ✨",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                Spacer(Modifier.height(8.dp))
-            }
-
-            HorizontalDivider(Modifier.padding(vertical = 12.dp), color = Color(0xFFEFEBE9))
-            Text(
-                text = if (expanded) "Show less" else "View needs ✓",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.End)
-            )
         }
     }
 }
