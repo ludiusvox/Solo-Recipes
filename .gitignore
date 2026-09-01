@@ -11,3 +11,5 @@ coverage/
 local.properties
 *.xcf
 .aider*
+*.apk
+*.aab
